@@ -1,0 +1,8 @@
+FROM java:8
+COPY . /var/www/java
+WORKDIR /var/www/java
+RUN javac server/Server.java
+ENV PORT 4444
+ENV GROUP 230.0.0.0
+ENV DEBUG "-Xdebug -Xrunjdwp:transport=dt_socket,address=8000,server=y,suspend=n"
+ENTRYPOINT ["/bin/sh", "-c", "java server.Server $PORT $GROUP $DEBUG"]
